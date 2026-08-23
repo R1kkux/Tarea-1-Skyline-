@@ -1,5 +1,13 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    // Hola
+public class Main {
+    static void main() {
+
+    }
+
+    private void Alg1() {
+
+    }
+
+    private boolean comprobarDominio(Punto p, Punto q) {
+        if (p)
+    }
 }
