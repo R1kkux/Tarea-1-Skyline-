@@ -13,4 +13,8 @@ public class Punto {
     public int getY() {
         return y;
     }
+
+    public boolean equals(Punto p) {
+        return  this.x == p.getX() && this.y == p.getY();
+    }
 }
