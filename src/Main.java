@@ -1,18 +1,14 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.time.*;
+import java.util.*;
 
 public class Main {
-    boolean debug = true;
+    boolean debug = false;
 
     void main() {
-        if (debug) {
-            pruebaAlgoritmos();
-        }
+        pruebaAlgoritmos();
     }
 
-    private void Alg1(Punto[] S) {
+    public void Alg1(Punto[] S) {
         ArrayList<Punto> pareto = new ArrayList<>();
 
         for (Punto p : S) {
@@ -34,48 +30,44 @@ public class Main {
             }
         }
 
-        if (debug) {
-            System.out.println("Pareto (Alg1): ");
-            printArreglo(pareto.toArray(new Punto[0]));
-        }
+        System.out.println("Pareto (Alg1): ");
+        printArreglo(pareto.toArray(new Punto[0]));
     }
 
     private void Alg2Arreglo(Punto[] S) {
-        ArrayList<Punto> C = new ArrayList<>();
+        ArrayList<Punto> pareto = new ArrayList<>();
 
         for (Punto p : S) {
             boolean dominado = false;
             int i = 0;
 
-            while (i < C.size() && !dominado) {
-                Punto q = C.get(i);
+            while (i < pareto.size() && !dominado) {
+                Punto q = pareto.get(i);
 
                 if (comprobarDominio(q, p)) {
                     dominado = true;
                 } else if (comprobarDominio(p, q)) {
-                    C.remove(i);
+                    pareto.remove(i);
                 } else {
                     i++;
                 }
             }
 
             if (!dominado) {
-                C.add(p);
+                pareto.add(p);
             }
         }
 
-        if (debug) {
-            System.out.println("Pareto (Alg2Arreglo): ");
-            printArreglo(C.toArray(new Punto[0]));
-        }
+        System.out.println("Pareto (Alg2Arreglo): ");
+        printArreglo(pareto.toArray(new Punto[0]));
     }
 
     private void Alg2MiEstructura(Punto[] S) {
-        LinkedList<Punto> C = new LinkedList<>();
+        LinkedList<Punto> pareto = new LinkedList<>();
 
         for (Punto p : S) {
             boolean dominado = false;
-            ListIterator<Punto> it = C.listIterator();
+            ListIterator<Punto> it = pareto.listIterator();
 
             while (it.hasNext() && !dominado) {
                 Punto q = it.next();
@@ -88,14 +80,12 @@ public class Main {
             }
 
             if (!dominado) {
-                C.addLast(p);
+                pareto.addLast(p);
             }
         }
 
-        if (debug) {
-            System.out.println("Pareto (Alg2MiEstructura): ");
-            printArreglo(C.toArray(new Punto[0]));
-        }
+        System.out.println("Pareto (Alg2MiEstructura): ");
+        printArreglo(pareto.toArray(new Punto[0]));
     }
 
     private boolean comprobarDominio(Punto p, Punto q) {
@@ -186,7 +176,7 @@ public class Main {
 
                 if (!puntos.contains(p)) {
                     puntos.add(p);
-                    System.out.println(" >> Nuevo punto: {" + p.getX() + "," + p.getY() + "}");
+                    // System.out.println(" >> Nuevo punto: {" + p.getX() + "," + p.getY() + "}");
                 } else {
                     System.out.println("Se ha generado un punto repetido.");
                     i--;
@@ -206,16 +196,49 @@ public class Main {
         System.out.println("\n\n ======================================= ");
         System.out.println(" == Comenzando prueba de Algoritmo 1: ");
         System.out.println(" ======================================= ");
+
+        LocalTime inicio1 =  LocalTime.now();
         Alg1(arregloPuntos);
+        LocalTime final1 = LocalTime.now();
+
+        System.out.println();
+
+        System.out.println("\n\t = El algoritmo 1 tardó " +Math.abs(final1.getHour() - inicio1.getHour()) +":" +Math.abs(final1.getMinute() - inicio1.getMinute()) + ":" +Math.abs(final1.getSecond() - inicio1.getSecond()) +"." +Math.abs(final1.getNano() - inicio1.getNano()) +" ==");
+
+        System.out.print("\nEscribe \"0\" para continuar: > ");
+        int st = sc.nextInt();
+
+        System.out.println();
 
         System.out.println("\n\n ======================================= ");
         System.out.println(" == Comenzando prueba de Alg2Arreglo: ");
         System.out.println(" ======================================= ");
+        LocalTime inicio2 =  LocalTime.now();
         Alg2Arreglo(arregloPuntos);
+        LocalTime final2 =  LocalTime.now();
+
+        System.out.println();
+
+        System.out.println("\n\t = El algoritmo 2 tardó " +Math.abs(final2.getHour() - inicio2.getHour()) +":" +Math.abs(final2.getMinute() - inicio2.getMinute()) + ":" +Math.abs(final2.getSecond() - inicio2.getSecond()) +"." +Math.abs(final2.getNano() - inicio2.getNano()) +" ==");
+
+        System.out.print("\nEscribe \"0\" para continuar: > ");
+        st = sc.nextInt();
+
+        System.out.println();
 
         System.out.println("\n\n ======================================= ");
         System.out.println(" == Comenzando prueba de Alg2MiEstructura: ");
         System.out.println(" ======================================= ");
+        LocalTime inicio3 =  LocalTime.now();
         Alg2MiEstructura(arregloPuntos);
+        LocalTime final3 =  LocalTime.now();
+
+        System.out.println();
+
+        System.out.println("\n >> Para un arreglo de puntos de " +arregloPuntos.length +" elementos (formato: HH:mm:ss.ms):");
+        System.out.println("\t = Alg1 tardó " +Math.abs(final1.getHour() - inicio1.getHour()) +":" +Math.abs(final1.getMinute() - inicio1.getMinute()) + ":" +Math.abs(final1.getSecond() - inicio1.getSecond()) +"." +Math.abs(final1.getNano() - inicio1.getNano()) +" ==");
+        System.out.println("\t = algoritmo2Arreg tardó " +Math.abs(final2.getHour() - inicio2.getHour()) +":" +Math.abs(final2.getMinute() - inicio2.getMinute()) + ":" +Math.abs(final2.getSecond() - inicio2.getSecond()) +"." +Math.abs(final2.getNano() - inicio2.getNano()) +" ==");
+        System.out.println("\t = algoritmo2MiEstructura tardó " +Math.abs(final3.getHour() - inicio3.getHour()) +":" +Math.abs(final3.getMinute() - inicio3.getMinute()) + ":" +Math.abs(final3.getSecond() - inicio3.getSecond()) +"." +Math.abs(final3.getNano() - inicio3.getNano()) +" ==");
+
     }
 }
