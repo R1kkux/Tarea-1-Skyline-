@@ -51,18 +51,14 @@ public class Main {
                 Punto q = C.get(i);
 
                 if (comprobarDominio(q, p)) {
-                    // (a) q domina a p: se descarta p
                     dominado = true;
                 } else if (comprobarDominio(p, q)) {
-                    // (b) p domina a q: se elimina q de C y NO se incrementa i
                     C.remove(i);
                 } else {
-                    // Ninguno domina: se avanza al siguiente punto en C
                     i++;
                 }
             }
 
-            // (c) Si ningún punto en C dominó a p, se agrega a C
             if (!dominado) {
                 C.add(p);
             }
@@ -75,31 +71,22 @@ public class Main {
     }
 
     private void Alg2MiEstructura(Punto[] S) {
-        // LinkedList en Java es una Lista Doblemente Enlazada por debajo
         LinkedList<Punto> C = new LinkedList<>();
 
         for (Punto p : S) {
             boolean dominado = false;
-            // Obtenemos el iterador que nos permite recorrer y eliminar en O(1)
             ListIterator<Punto> it = C.listIterator();
 
             while (it.hasNext() && !dominado) {
-                // En Java, next() obtiene el valor y avanza el cursor automáticamente
                 Punto q = it.next();
 
                 if (comprobarDominio(q, p)) {
-                    // (a) q domina a p: se descarta p
                     dominado = true;
                 } else if (comprobarDominio(p, q)) {
-                    // (b) p domina a q: se elimina q de forma directa O(1)
-                    // it.remove() elimina el último elemento devuelto por next()
                     it.remove();
                 }
-                // El "Sino it.Avanzar()" del pseudocódigo no es necesario escribirlo
-                // porque it.next() ya hizo el trabajo de avanzar el puntero.
             }
 
-            // (c) Si ningún punto en C dominó a p, se inserta al final
             if (!dominado) {
                 C.addLast(p);
             }
