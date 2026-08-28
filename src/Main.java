@@ -11,7 +11,7 @@ public class Main {
         }
     }
 
-    private void Alg1(Punto[] S) {
+    private Punto[] Alg1(Punto[] S) {
         ArrayList<Punto> pareto = new ArrayList<>();
 
         for (Punto p : S) {
@@ -38,7 +38,7 @@ public class Main {
             printArreglo(pareto.toArray(new Punto[0]));
         }
 
-        pareto.toArray(new Punto[0]);
+        return pareto.toArray(new Punto[0]);
     }
 
     private boolean comprobarDominio(Punto p, Punto q) {
