@@ -161,7 +161,7 @@ public class Main {
 
                 if (!puntos.contains(p)) {
                     puntos.add(p);
-                    System.out.println(" >> " +i);
+                    System.out.println(" >> " + i);
                 } else {
                     System.out.println("Se ha generado un punto repetido.");
                     i--;
@@ -176,24 +176,24 @@ public class Main {
         System.out.println(" == Comenzando prueba de algoritmos: ");
         System.out.println(" ======================================= ");
 
-        LocalTime inicio1 =  LocalTime.now();
+        long inicio1 = System.nanoTime();
         pareto = Alg1(arregloPuntos);
-        LocalTime final1 = LocalTime.now();
+        long final1 = System.nanoTime();
 
         System.out.print(" == Pareto Alg1: ");
         printArreglo(pareto);
 
-        LocalTime inicio2 =  LocalTime.now();
+        long inicio2 = System.nanoTime();
         pareto = Alg2Arreglo(arregloPuntos);
-        LocalTime final2 =  LocalTime.now();
+        long final2 = System.nanoTime();
 
         System.out.println();
         System.out.print(" == Pareto Algoritmo2: ");
         printArreglo(pareto);
 
-        LocalTime inicio3 =  LocalTime.now();
+        long inicio3 = System.nanoTime();
         pareto = Alg2MiEstructura(arregloPuntos);
-        LocalTime final3 =  LocalTime.now();
+        long final3 = System.nanoTime();
 
         System.out.println();
         System.out.print(" == Pareto Algoritmo2MiEstructura: ");
@@ -202,25 +202,25 @@ public class Main {
         System.out.println();
         System.out.println();
 
-        System.out.println("\t == Resultados: Para un arreglo de puntos con " +arregloPuntos.length +" elementos: ");
+        long duracion1 = final1 - inicio1;
+        long duracion2 = final2 - inicio2;
+        long duracion3 = final3 - inicio3;
+
+        System.out.println("\t == Resultados: Para un arreglo de puntos con " + arregloPuntos.length + " elementos: ");
 
         System.out.println("\n >> El algoritmo 1 tardó "
-                +Math.abs(final1.getHour() - inicio1.getHour()) +":"
-                +Math.abs(final1.getMinute() - inicio1.getMinute()) + ":"
-                +Math.abs(final1.getSecond() - inicio1.getSecond()) +"."
-                +String.format("%09d", Math.abs(final1.getNano() - inicio1.getNano())) + " ==");
+                + (duracion1 / 60_000_000_000L) + ":"
+                + ((duracion1 / 1_000_000_000L) % 60) + "."
+                + String.format("%09d", duracion1 % 1_000_000_000L) + " ==");
 
         System.out.println(" >> El algoritmo 2 tardó "
-                +Math.abs(final2.getHour() - inicio2.getHour()) +":"
-                +Math.abs(final2.getMinute() - inicio2.getMinute()) + ":"
-                +Math.abs(final2.getSecond() - inicio2.getSecond()) +"."
-                +String.format("%09d", Math.abs(final2.getNano() - inicio2.getNano())) + " ==");
+                + (duracion2 / 60_000_000_000L) + ":"
+                + ((duracion2 / 1_000_000_000L) % 60) + "."
+                + String.format("%09d", duracion2 % 1_000_000_000L) + " ==");
 
         System.out.println(" >> algoritmo2MiEstructura tardó "
-                +Math.abs(final3.getHour() - inicio3.getHour()) +":"
-                +Math.abs(final3.getMinute() - inicio3.getMinute()) + ":"
-                +Math.abs(final3.getSecond() - inicio3.getSecond()) +"."
-                +String.format("%09d", Math.abs(final3.getNano() - inicio3.getNano())) + " ==");
-
+                + (duracion3 / 60_000_000_000L) + ":"
+                + ((duracion3 / 1_000_000_000L) % 60) + "."
+                + String.format("%09d", duracion3 % 1_000_000_000L) + " ==");
     }
 }
