@@ -206,21 +206,14 @@ public class Main {
         long duracion2 = final2 - inicio2;
         long duracion3 = final3 - inicio3;
 
-        System.out.println("\t == Resultados: Para un arreglo de puntos con " + arregloPuntos.length + " elementos: ");
+        double ms1 = duracion1 / 1_000_000.0;
+        double ms2 = duracion2 / 1_000_000.0;
+        double ms3 = duracion3 / 1_000_000.0;
 
-        System.out.println("\n >> El algoritmo 1 tardó "
-                + (duracion1 / 60_000_000_000L) + ":"
-                + ((duracion1 / 1_000_000_000L) % 60) + "."
-                + String.format("%09d", duracion1 % 1_000_000_000L) + " ==");
+        System.out.println("== Resultados: Para un arreglo de " + arregloPuntos.length + " elementos ==");
 
-        System.out.println(" >> El algoritmo 2 tardó "
-                + (duracion2 / 60_000_000_000L) + ":"
-                + ((duracion2 / 1_000_000_000L) % 60) + "."
-                + String.format("%09d", duracion2 % 1_000_000_000L) + " ==");
-
-        System.out.println(" >> algoritmo2MiEstructura tardó "
-                + (duracion3 / 60_000_000_000L) + ":"
-                + ((duracion3 / 1_000_000_000L) % 60) + "."
-                + String.format("%09d", duracion3 % 1_000_000_000L) + " ==");
+        System.out.printf(" >> El Alg1 tardó:                %.4f ms%n", ms1);
+        System.out.printf(" >> El Alg2Arreglo tardó:         %.4f ms%n", ms2);
+        System.out.printf(" >> El Alg2MiEstructura tardó:    %.4f ms%n", ms3);
     }
 }
