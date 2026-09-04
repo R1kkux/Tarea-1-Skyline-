@@ -2,6 +2,8 @@ import java.time.*;
 import java.util.*;
 
 public class Main {
+    boolean debug = false;  // Activar esto para ver cuando se generan puntos.
+
     void main() {
         pruebaAlgoritmos();
     }
@@ -161,7 +163,10 @@ public class Main {
 
                 if (!puntos.contains(p)) {
                     puntos.add(p);
-                    System.out.println(" >> " + i);
+
+                    if (debug) {
+                        System.out.println(" >> " + i);
+                    }
                 } else {
                     System.out.println("Se ha generado un punto repetido.");
                     i--;
